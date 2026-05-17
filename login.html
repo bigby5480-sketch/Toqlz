@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل الدخول</title>
+  <script src="firebase.js"></script>
+</head>
+
+<body style="font-family:Arial; background:#eef; display:flex; justify-content:center; align-items:center; height:100vh;">
+
+<div style="background:white;padding:25px;border-radius:10px;width:300px;">
+  <h2>تسجيل الدخول</h2>
+
+  <input id="email" placeholder="الإيميل" style="width:100%;padding:10px;margin:5px 0;">
+  <input id="password" type="password" placeholder="كلمة المرور" style="width:100%;padding:10px;margin:5px 0;">
+
+  <button onclick="login()" style="width:100%;padding:10px;background:#2196F3;color:white;border:none;">
+    دخول
+  </button>
+
+  <p style="text-align:center;">
+    لا يوجد حساب؟ <a href="register.html">إنشاء حساب</a>
+  </p>
+</div>
+
+<script>
+function login(){
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      window.location.href = "home.html";
+    })
+    .catch(err => alert(err.message));
+}
+</script>
+
+</body>
+</html>
