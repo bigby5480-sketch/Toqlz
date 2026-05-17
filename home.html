@@ -1,1 +1,95 @@
 
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>الصفحة الرئيسية</title>
+</head>
+
+<body style="font-family:Arial; padding:20px; background:#fafafa;">
+
+<h2>🏠 الصفحة الرئيسية</h2>
+
+<!-- 🧑‍💼 لوحة الأدمن -->
+<div style="background:white;padding:15px;border-radius:10px;margin-bottom:20px;">
+
+  <h3>🧑‍💼 رسالة الأدمن</h3>
+
+  <textarea id="adminMessage"
+    placeholder="اكتب رسالة تظهر لكل المستخدمين"
+    style="width:100%;height:100px;padding:10px;"></textarea>
+
+  <button onclick="saveAdminMessage()" style="padding:10px;margin-top:10px;">
+    حفظ الرسالة
+  </button>
+
+</div>
+
+<!-- 📩 عرض الرسائل -->
+<div id="welcomeBox" style="background:white;padding:20px;border-radius:10px;"></div>
+
+<script>
+
+// =======================
+// حفظ رسالة الأدمن
+// =======================
+function saveAdminMessage(){
+  const msg = document.getElementById("adminMessage").value;
+  localStorage.setItem("adminMessage", msg);
+  alert("تم حفظ رسالة الأدمن");
+}
+
+// =======================
+// تحديد هل أول زيارة
+// =======================
+let isFirstVisit = localStorage.getItem("visited");
+
+// رسالة الأدمن
+let adminMsg = localStorage.getItem("adminMessage");
+
+// محتوى الرسالة
+let content = "";
+
+// =======================
+// أول زيارة
+// =======================
+if(!isFirstVisit){
+  content = `
+    <h3>👋 أهلاً بك في موقع الجلسات النفسية</h3>
+    <p>
+      هذا الموقع مخصص لدعم الصحة النفسية، وتقديم محتوى يساعدك على فهم نفسك
+      وتحسين جودة حياتك النفسية.
+    </p>
+  `;
+
+  localStorage.setItem("visited", "true");
+}
+
+// =======================
+// زيارات لاحقة
+// =======================
+else {
+  content = `
+    <h3>👋 مرحباً بعودتك مجددًا</h3>
+    <p>سعيدين باستمرارك معنا في رحلتك النفسية.</p>
+  `;
+}
+
+// =======================
+// إضافة رسالة الأدمن
+// =======================
+if(adminMsg){
+  content += `
+    <hr>
+    <h4>📢 رسالة الإدارة</h4>
+    <p>${adminMsg}</p>
+  `;
+}
+
+// عرض المحتوى
+document.getElementById("welcomeBox").innerHTML = content;
+
+</script>
+
+</body>
+</html>
